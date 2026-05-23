@@ -1,6 +1,7 @@
 import { prisma } from "./lib/prisma";
 
 async function main() {
+  // update or create a user
   const user = await prisma.user.upsert({
     where: {
       email: "john.doe@example.com",
@@ -16,10 +17,16 @@ async function main() {
     },
   });
   console.log("Upserted user:", user);
-
+  // get all users
   const allUsers = await prisma.user.findMany();
-
-    console.log("All users:", JSON.stringify(allUsers, null, 2));
+  //  delete a user
+  const deleteUser = await prisma.user.delete({
+    where: {
+      id: 1,
+    },
+  });
+  console.log("Deleted user:", deleteUser);
+  console.log("All users:", JSON.stringify(allUsers, null, 2));
 }
 
 main()
