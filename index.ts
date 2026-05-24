@@ -1,11 +1,14 @@
 import { prisma } from "./lib/prisma";
 
 async function main() {
-  const users = await prisma.user.findUnique({
+  const users = await prisma.user.update({
     where: {
-      id: 4
-    }
-  })
+      id: 4,
+    },
+    data: {
+      name: "Sajib",
+    },
+  });
   console.log(users);
 }
 
